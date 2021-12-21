@@ -30,9 +30,22 @@ public class PartidaXadrez {
 	
 	private void iniciarTabuleiro() {
 		
-		posicaoNovaPeca('b',6,new Torre(board,Cor.BRANCO));
-		posicaoNovaPeca('e',8,new Rei(board,Cor.PRETO));
-		posicaoNovaPeca('e',1,new Rei(board,Cor.BRANCO));
+        posicaoNovaPeca('c', 1, new Torre(board, Cor.BRANCO));
+        posicaoNovaPeca('c', 2, new Torre(board, Cor.BRANCO));
+        posicaoNovaPeca('d', 2, new Torre(board, Cor.BRANCO));
+        posicaoNovaPeca('e', 2, new Torre(board, Cor.BRANCO));
+        posicaoNovaPeca('e', 1, new Torre(board, Cor.BRANCO));
+        posicaoNovaPeca('d', 1, new Rei(board, Cor.BRANCO));
+
+        posicaoNovaPeca('c', 7, new Torre(board, Cor.PRETO));
+        posicaoNovaPeca('c', 8, new Torre(board, Cor.PRETO));
+        posicaoNovaPeca('d', 7, new Torre(board, Cor.PRETO));
+        posicaoNovaPeca('e', 7, new Torre(board, Cor.PRETO));
+        posicaoNovaPeca('e', 8, new Torre(board, Cor.PRETO));
+        posicaoNovaPeca('d', 8, new Rei(board, Cor.PRETO));
+		
+		
+	         
 		
 		
 	}
