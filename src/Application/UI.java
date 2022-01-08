@@ -49,42 +49,49 @@ public class UI {
 		}
 	}
 
-	public static void imprimirPartida(PartidaXadrez partidaXadrez,List<PecaXadrez> capturada) {
+	public static void imprimirPartida(PartidaXadrez partidaXadrez, List<PecaXadrez> capturada) {
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		System.out.println();
 		imprimirPecasCapturadas(capturada);
 		System.out.println();
-		System.out.println("Turno : "+partidaXadrez.getTurno());
-		System.out.println("Esperando Jogador: "+partidaXadrez.getjogadorAtual());
-		if(partidaXadrez.getCheck()) {
-			System.out.println("CHECK");
-				}
+		System.out.println("Turno : " + partidaXadrez.getTurno());
+		if(!partidaXadrez.getCheckMate()) {
+			System.out.println("Esperando Jogador: " + partidaXadrez.getjogadorAtual());
+			if (partidaXadrez.getCheck()) {
+				System.out.println("CHECK");
+				System.out.println(partidaXadrez.getCheckMate());
+			}
+		}else {
+			System.out.println("CHECKMATE!!!");
+			System.out.println("Ganhador: "+partidaXadrez.getjogadorAtual());
+		}
+		
 	}
+
 	public static void imprimirTabuleiro(PecaXadrez[][] peca) {
 		for (int i = 0; i < peca.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < peca.length; j++) {
-				imprimirPeca(peca[i][j],false);
+				imprimirPeca(peca[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  A B C D E F G H ");
 	}
-	
-	public static void imprimirTabuleiro(PecaXadrez[][] peca,boolean[][] movimentoPossivel) {
+
+	public static void imprimirTabuleiro(PecaXadrez[][] peca, boolean[][] movimentoPossivel) {
 		for (int i = 0; i < peca.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < peca.length; j++) {
-				imprimirPeca(peca[i][j],movimentoPossivel[i][j]);
+				imprimirPeca(peca[i][j], movimentoPossivel[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println(" A B C D E F G H ");
 	}
 
-
 	private static void imprimirPeca(PecaXadrez peca, boolean background) {
-		if(background) {
+		if (background) {
 			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
 		if (peca == null) {
@@ -98,27 +105,23 @@ public class UI {
 		}
 		System.out.print(" ");
 	}
-	
+
 	private static void imprimirPecasCapturadas(List<PecaXadrez> capturadas) {
-		
-		List<PecaXadrez> brancas = capturadas.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
+
+		List<PecaXadrez> brancas = capturadas.stream().filter(x -> x.getCor() == Cor.BRANCO)
+				.collect(Collectors.toList());
 		List<PecaXadrez> pretas = capturadas.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
 		System.out.println("Peças Capturadas: ");
 		System.out.print("Brancas: ");
 		System.out.print(ANSI_WHITE);
 		System.out.println(Arrays.toString(brancas.toArray()));
 		System.out.print(ANSI_RESET);
-		
+
 		System.out.print("Pretas: ");
 		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(pretas.toArray()));
 		System.out.print(ANSI_RESET);
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
 }
