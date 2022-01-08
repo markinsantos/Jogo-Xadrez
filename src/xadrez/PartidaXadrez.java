@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import Tabuleiro.Board;
 import Tabuleiro.Peca;
 import Tabuleiro.Posicao;
+import xadrez.pecas.Peao;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -86,7 +87,8 @@ public class PartidaXadrez {
 	}
 
 	private Peca moverPeca(Posicao inicial, Posicao target) {
-		Peca peca = board.removePeca(inicial);
+		PecaXadrez peca = (PecaXadrez)board.removePeca(inicial);
+		peca.incrementarMovimentos();
 		Peca pecaCapturada = board.removePeca(target);
 		board.PosicaoPeca(peca, target);
 
@@ -102,7 +104,8 @@ public class PartidaXadrez {
 
 	private void desfazerMovimento(Posicao inicial, Posicao target, Peca pecaCapturada) {
 
-		Peca p = board.removePeca(target);
+		PecaXadrez p = (PecaXadrez)board.removePeca(target);
+		p.decrementarMovimentos();
 		board.PosicaoPeca(p, inicial);
 		if (pecaCapturada != null) {
 			board.PosicaoPeca(pecaCapturada, target);
@@ -206,13 +209,30 @@ public class PartidaXadrez {
 
 	private void iniciarTabuleiro() {
 
-		posicaoNovaPeca('h', 7, new Torre(board, Cor.BRANCO));
-		posicaoNovaPeca('d', 1, new Torre(board, Cor.BRANCO));
-
+		posicaoNovaPeca('a', 1, new Torre(board, Cor.BRANCO));
+		posicaoNovaPeca('h', 1, new Torre(board, Cor.BRANCO));
 		posicaoNovaPeca('e', 1, new Rei(board, Cor.BRANCO));
+		posicaoNovaPeca('a', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('b', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('c', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('d', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('e', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('f', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('g', 2, new Peao(board, Cor.BRANCO));
+		posicaoNovaPeca('h', 2, new Peao(board, Cor.BRANCO));
 
-		posicaoNovaPeca('b', 8, new Torre(board, Cor.PRETO));
-		posicaoNovaPeca('a', 8, new Rei(board, Cor.PRETO));
+		posicaoNovaPeca('a', 8, new Torre(board, Cor.PRETO));
+		posicaoNovaPeca('h', 8, new Torre(board, Cor.PRETO));
+		posicaoNovaPeca('e', 8, new Rei(board, Cor.PRETO));
+		posicaoNovaPeca('a', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('b', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('c', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('d', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('e', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('f', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('g', 7, new Peao(board, Cor.PRETO));
+		posicaoNovaPeca('h', 7, new Peao(board, Cor.PRETO));
+
 
 	}
 }
