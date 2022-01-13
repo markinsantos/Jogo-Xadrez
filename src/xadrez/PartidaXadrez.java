@@ -100,6 +100,23 @@ public class PartidaXadrez {
 			pecasCapturadas.add(pecaCapturada);
 
 		}
+		// movimento especial rook
+		if(peca instanceof Rei && target.getColuna()== inicial.getColuna()+2) {
+			Posicao inicialTorre = new Posicao(inicial.getLinha(),inicial.getColuna()+3);
+			Posicao targetTorre = new Posicao(inicial.getLinha(),inicial.getColuna()+1);
+			PecaXadrez rook = (PecaXadrez) board.removePeca(inicialTorre);
+			board.PosicaoPeca(rook, targetTorre);
+			rook.incrementarMovimentos();
+		}
+		
+		if(peca instanceof Rei && target.getColuna()== inicial.getColuna()-2) {
+			Posicao inicialTorre = new Posicao(inicial.getLinha(),inicial.getColuna()-4);
+			Posicao targetTorre = new Posicao(inicial.getLinha(),inicial.getColuna()-1);
+			PecaXadrez rook = (PecaXadrez) board.removePeca(inicialTorre);
+			board.PosicaoPeca(rook, targetTorre);
+			rook.incrementarMovimentos();
+		}
+		
 
 		return pecaCapturada;
 
@@ -115,6 +132,23 @@ public class PartidaXadrez {
 			pecasCapturadas.remove(pecaCapturada);
 			pecasNoTabuleiro.add(pecaCapturada);
 		}
+		
+		if(p instanceof Rei && target.getColuna()== inicial.getColuna()+2) {
+			Posicao inicialTorre = new Posicao(inicial.getLinha(),inicial.getColuna()+3);
+			Posicao targetTorre = new Posicao(inicial.getLinha(),inicial.getColuna()+1);
+			PecaXadrez rook = (PecaXadrez) board.removePeca(targetTorre);
+			board.PosicaoPeca(rook, inicialTorre);
+			rook.decrementarMovimentos();
+		}
+		
+		if(p instanceof Rei && target.getColuna()== inicial.getColuna()-2) {
+			Posicao inicialTorre = new Posicao(inicial.getLinha(),inicial.getColuna()-4);
+			Posicao targetTorre = new Posicao(inicial.getLinha(),inicial.getColuna()-1);
+			PecaXadrez rook = (PecaXadrez) board.removePeca(targetTorre);
+			board.PosicaoPeca(rook, inicialTorre);
+			rook.decrementarMovimentos();
+		}
+		
 
 	}
 
@@ -219,7 +253,7 @@ public class PartidaXadrez {
 		posicaoNovaPeca('c', 1, new Bispo(board, Cor.BRANCO));
 		posicaoNovaPeca('f', 1, new Bispo(board, Cor.BRANCO));
 		posicaoNovaPeca('d', 1, new Rainha(board, Cor.BRANCO));
-		posicaoNovaPeca('e', 1, new Rei(board, Cor.BRANCO));
+		posicaoNovaPeca('e', 1, new Rei(board, Cor.BRANCO,this));
 		posicaoNovaPeca('a', 2, new Peao(board, Cor.BRANCO));
 		posicaoNovaPeca('b', 2, new Peao(board, Cor.BRANCO));
 		posicaoNovaPeca('c', 2, new Peao(board, Cor.BRANCO));
@@ -236,7 +270,7 @@ public class PartidaXadrez {
 		posicaoNovaPeca('c', 8, new Bispo(board, Cor.PRETO));
 		posicaoNovaPeca('f', 8, new Bispo(board, Cor.PRETO));
 		posicaoNovaPeca('d', 8, new Rainha(board, Cor.PRETO));
-		posicaoNovaPeca('e', 8, new Rei(board, Cor.PRETO));
+		posicaoNovaPeca('e', 8, new Rei(board, Cor.PRETO,this));
 		posicaoNovaPeca('a', 7, new Peao(board, Cor.PRETO));
 		posicaoNovaPeca('b', 7, new Peao(board, Cor.PRETO));
 		posicaoNovaPeca('c', 7, new Peao(board, Cor.PRETO));
