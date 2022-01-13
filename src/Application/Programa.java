@@ -16,7 +16,7 @@ public class Programa {
 		
 		Scanner scan = new Scanner(System.in);
 		PartidaXadrez partida = new PartidaXadrez();
-		List<PecaXadrez> capturada = new ArrayList();
+		List<PecaXadrez> capturada = new ArrayList<PecaXadrez>();
 
 		while (!partida.getCheckMate()) {
 			try {
@@ -25,16 +25,28 @@ public class Programa {
 				System.out.println();
 				System.out.print("Inicial: ");
 				PosicaoXadrez inicial = UI.lerPosicaoXadre(scan);
+				
 				boolean[][] movimentoPossivel = partida.movimentosPossiveis(inicial);
 				UI.limparTela();
 				UI.imprimirTabuleiro(partida.getPecas(),movimentoPossivel);
 				System.out.println();
 				System.out.print("Destino: ");
 				PosicaoXadrez target = UI.lerPosicaoXadre(scan);
+				
 				PecaXadrez pecaCapturada = partida.perfomaceMoverPeca(inicial, target);
+			
+				
 				if(pecaCapturada != null) {
 					capturada.add(pecaCapturada);
+					
 				}
+				
+				if(partida.getPromocao() != null) {
+					System.out.println("Digite a peça a ser promovida(Q/C/T/B): ");
+					String letra = scan.nextLine();
+					partida.trocaPromovidaPeca(letra);
+				}
+				
 		}catch(ExecaoXadrez e) {
 			System.out.println(e.getMessage());
 			scan.nextLine();
